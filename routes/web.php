@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[HomeController::class,'home']);
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::post('/produk', [HomeController::class, 'produk']);
+
 
 

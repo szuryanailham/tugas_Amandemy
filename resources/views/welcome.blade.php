@@ -7,72 +7,53 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
-    {{-- NAVBAR --}}
-    <nav class="navbar navbar-expand-lg bg-dark navbar-light" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand fw-bold" href="#">Unikcuy</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Gallery</a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+    <section class="container">
+      <div class="row">
+        <div class="col-6 m-auto my-5 border border-success p-3">
+          <h2 class="text-center fw-bold mb-4">Tambah data produk</h2>
+          <form method="POST" action="/produk">
+            @csrf
+                  @if ($errors->has('error'))
+          <div class="alert alert-danger">
+              {{ $errors->first('error') }}
           </div>
-        </div>
-      </nav>
-    {{-- END NAVBAR --}}
-
-    {{-- HERO SECTION --}}
-    <section class="container mt-3">
-        <div class="row">
-            <div class="col-6  p-5">
-                <div class="mt-5">
-                    <div class="lh-2">
-                        <P>Enjoy Your Taste</P>
-                        <h1 class="fw-bold fs-1">UnikCuy Coffe</h1>
-                        <p>Lorem ipsum dolor sit.</p>
-                    </div>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum eum iure reiciendis, inventore doloremque blanditiis dolores nesciunt incidunt saepe labore odit similique doloribus ipsam minima exercitationem veniam pariatur nostrum debitis?</p>
-                </div>
-                </div>
-              
-            <div class="col-6  p-5">
-                <img style="height:400px;width:500px" src="/img/caffe.jpg" alt="image">
+      @endif
+            {{-- nama produk --}}
+            <div class="mb-3">
+              <label for="nama_produk" class="form-label fw-bold">Nama Produk</label>
+              <input value="{{ old('nama_produk') }}" name="nama_produk" type="text" class="form-control" id="nama_produk">
             </div>
-        </div>
-    </section>
-    {{-- END HERO SECTION --}}
-
-    {{-- MENU SECTION --}}
-    <h3 class="text-center">Menu Utama</h3>
-
-    <section class="container p-3 d-flex flex-wrap gap-3 justify-content-center">
-        @foreach ($DataCoffe as $item)
-        <div class="card" style="width: 18rem;">
-            <img style="height:150px" src="{{ $item['gambar'] }}" class="card-img-top" alt="produk">
-            <div class="card-body">
-                <h5 class="card-title fw-bold">{{ $item['nama'] }}</h5>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat ipsa facere neque velit quod nulla?!</p>
-                <p class="card-text">Harga: Rp {{ number_format($item['harga'], 0, ',', '.') }}</p>
+            {{-- berat --}}
+            <div class="mb-3">
+              <label for="berat_produk" class="form-label fw-bold">berat</label>
+              <input value="{{ old('berat_produk') }}" name="berat_produk" type="number" class="form-control" id="berat_produk">
             </div>
+            {{-- harga --}}
+            <div class="mb-3">
+              <label for="harga_produk" class="form-label fw-bold">Harga</label>
+              <input value="{{ old('harga_produk') }}" name="harga_produk" type="number" class="form-control" id="harga_produk">
+            </div>
+            {{-- stok --}}
+            <div class="mb-3">
+              <label for="stok" class="form-label fw-bold">Stok</label>
+              <input value="{{ old('stok') }}" name="stok" type="number" class="form-control" id="stok">
+            </div>
+            <select name="kondisi_barang" class="form-select">
+              <option value="baru" {{ old('kondisi_barang') == 'baru' ? 'selected' : '' }}>Baru</option>
+              <option value="second" {{ old('kondisi_barang') == 'second' ? 'selected' : '' }}>Second</option>
+          </select>
+          
+          <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label fw-bold">Deskripsi</label>
+              <textarea name="deskripsi" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ old('deskripsi') }}</textarea>
+          </div>
+
+            {{-- submit --}}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
-        @endforeach
-        
+      </div>
     </section>
-    {{-- END MENU SECTION --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
