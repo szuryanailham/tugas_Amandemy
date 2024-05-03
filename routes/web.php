@@ -1,6 +1,9 @@
 <?php
+
+use App\Http\Controllers\editProductController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/produk', [HomeController::class, 'produk']);
+Route::get('/AllproductCard', [HomeController::class, 'Allproduct'])->name('listProduct');
+
+Route::get('/listProduct', [HomeController::class, 'show'])->name('listProduct');
+Route::resource('/EditProduct',editProductController::class);
 
 
 

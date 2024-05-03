@@ -8,19 +8,19 @@
   </head>
   <body>
     <h1 class="text-center mt-3">List Produk</h1>
-    <section class=" container d-flex flex-wrap flex-grow-1 p-5 m-auto bg-danger">
+    <section class=" container d-flex flex-wrap flex-grow-1 p-5 m-auto">
         {{-- card 1 --}}
-        @foreach ($produk as $item)
+        @foreach ($product as $item)
         <div class="card m-2" style="width: 18rem;">
-            <img src="https://source.unsplash.com/random/300x100" class="card-img-top" alt="coba">
+            <img height="200px" src={{ $item['gambar'] }} class="card-img-top" alt="coba">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
-                    <h5 class="card-title">{{ $item['nama_produk'] }}</h5>
-                    <button type="button" class="btn btn-success">{{ $item['kondisi_barang'] }}</button>
+                    <h5 class="card-title">{{ $item['nama'] }}</h5>
+                    <button type="button" class="btn btn-success">{{ $item['kondisi'] }}</button>
                 </div>
                 <div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-success">{{ $item['stok'] }}</button>
-                    <button type="button" class="btn btn-success">{{ $item['harga_produk'] }}</button>
+                    <button type="button" class="btn btn-success">{{ $item['harga'] }}</button>
                 </div>
               <p class="card-text p-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               <a href="#" class="btn btn-primary">Go somewhere</a>
