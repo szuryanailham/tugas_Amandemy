@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+
+Route::get('/', [HomeController::class, 'Allproduct'])->name('listProduct');
+Route::get('/tambah',function(){
     return view('welcome');
 });
-
-Route::get('/AllproductCard', [HomeController::class, 'Allproduct'])->name('listProduct');
-
-Route::get('/listProduct', [HomeController::class, 'show'])->name('listProduct');
+Route::get("/listProduct/{user_id}", [HomeController::class, 'show'])->name('listProduct');
+Route::get("/detailuser/{user_id}", [HomeController::class, 'detailUser']);
 Route::resource('/EditProduct',editProductController::class);
 
 

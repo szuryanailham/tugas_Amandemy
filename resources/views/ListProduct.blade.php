@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
   <body>
-   
     <div class="container h-auto mt-5">
     {{-- tabel --}}
     <div class="d-flex justify-content-between">
       <h1>List data product</h1>
      <div>
-     <a class="btn btn-success" href="/AllproductCard">show product</a>
-     <a class="btn btn-primary" href="/">new product</a>
+     <a class="btn btn-success" href="/detailuser/{{ $user_id }}">show product</a>
+     <a class="btn btn-primary" href="/tambah">new product</a>
+     <a class="btn btn-primary" href="/tambah">show profile</a>
      </div>
     </div>
     
@@ -50,12 +50,12 @@
                      <img  style="width: 150px;" src={{ $item["gambar"] }} alt="Image"></td>
                  <td>
                   <div>
-                    <form method="POST" class="d-inline" action="/EditProduct/{{$item['id'] }}">
+                    <form method="POST" class="d-inline" action="EditProduct/{{$item['id'] }}">
                         @method('delete')
                         @csrf
                         <button type="submit" onclick="return confirm('are you sure ?')"  data-toggle="tooltip" title="delete" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                       </form>
-                    <a style="color: white" class="btn btn-warning ml-2" href="EditProduct/{{ $item['id'] }}/edit"><i class="bi bi-pencil-square"></i></a>
+                    <a style="color: white" class="btn btn-warning ml-2" href="/EditProduct/{{ $item['id'] }}/edit"><i class="bi bi-pencil-square"></i></a>
                   </div>
                  </td>
               </tr>

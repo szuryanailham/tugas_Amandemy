@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -40,12 +41,27 @@ class HomeController extends Controller
     return redirect()->route('listProduk');
 }
 
-public function show(){
-    $produk = Product::all();
+public function show($id_user){
+    $produk = Product::where('id_user', $id_user)->get();
+    // $produk = Product::all();
     return view('ListProduct',[
-        'product'=> $produk
+        'product'=> $produk,
+        'user_id' =>$id_user
     ]);
 }
+
+public function detailUser($id_user){
+
+    // Mengambil satu objek User berdasarkan ID
+    $user = User::find($id_user);
+    $toko = $user->toko;
+    return view('detailUser',[
+        'user'=>$user,
+        'toko'=>$toko,
+    ]);
+
+}
+
 
 public function Allproduct(){
     $produk = Product::all();

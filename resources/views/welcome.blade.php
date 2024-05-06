@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-6 m-auto my-5 border border-success p-3">
           <h2 class="text-center fw-bold mb-4">Tambah data produk</h2>
-          <form method="POST" action="EditProduct">
+          <form method="POST" action="/EditProduct">
             @csrf
                   @if ($errors->has('error'))
           <div class="alert alert-danger">

@@ -20,7 +20,7 @@ class editProductController extends Controller
      */
     public function create()
     {
-    
+        return view('welcome');
     }
 
     /**
@@ -47,17 +47,22 @@ class editProductController extends Controller
         // Tambahkan data produk yang baru dimasukkan ke dalam array $data
         $newProduct = [
             'gambar' => $request->gambar_produk,
+            'id_user' =>rand(1,2),
             'nama' => $request->nama_produk,
             'berat' => $request->berat_produk,
             'harga' => $request->harga_produk,
             'stok' => $request->stok,
             'kondisi' => $request->kondisi_barang,
             'deskripsi' => $request->deskripsi,
+
         ];
         // memasukan kedalam database:
         Product::insert($newProduct);
         
-        return redirect()->route('listProduct');
+        return view('product', [
+            'product' => Product::all()
+        ]);
+        
     }
 
     /**
@@ -99,7 +104,7 @@ class editProductController extends Controller
             'deskripsi' => 'required|string',
         ]);
         Product::where('id', $id)->update($validatedData);
-        return redirect('listProduct')->with('success', 'Category has been updated');
+        return redirect('/')->with('success', 'Category has been updated');
     }
 
     /**

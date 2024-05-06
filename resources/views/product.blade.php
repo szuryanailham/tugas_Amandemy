@@ -8,6 +8,10 @@
   </head>
   <body>
     <h1 class="text-center mt-3">List Produk</h1>
+    <div class="container bg-dange d-flex justify-content-between">
+      <a class="btn btn-primary" href="/listProduct/1">admin</a>
+      <a class="btn btn-success" href="/listProduct/2">Marchendast</a>
+    </div>
     <section class=" container d-flex flex-wrap flex-grow-1 p-5 m-auto">
         {{-- card 1 --}}
         @foreach ($product as $item)
