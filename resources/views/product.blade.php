@@ -16,7 +16,11 @@
         {{-- card 1 --}}
         @foreach ($product as $item)
         <div class="card m-2" style="width: 18rem;">
-            <img height="200px" src={{ $item['gambar'] }} class="card-img-top" alt="coba">
+          @if ($item->image)
+          <img class="img-fluid" style="width:700px;max-height:350px;overflow:hidden" src="{{ asset('storage/'.$item->image) }}"  alt="{{ $item->title }}">
+      @else
+          <img class="img-fluid" src="https://source.unsplash.com/1600x900/?{{ $item->nama }}"  alt="{{ $news->nama }}">
+      @endif
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
                     <h5 class="card-title">{{ $item['nama'] }}</h5>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('harga', 10, 2);
             $table->integer('stok');
             $table->decimal('berat', 8, 2);
-            $table->string('gambar')->nullable();
+            $table->string('image')->nullable();
             $table->enum('kondisi', ['baru', 'bekas'])->default('baru');
             $table->text('deskripsi')->nullable();
             $table->timestamps();

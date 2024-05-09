@@ -13,9 +13,9 @@
     <div class="d-flex justify-content-between">
       <h1>List data product</h1>
      <div>
-     <a class="btn btn-success" href="/detailuser/{{ $user_id }}">show product</a>
+     <a class="btn btn-success" href="/detailuser/{{ $user_id }}">show profile</a>
      <a class="btn btn-primary" href="/tambah">new product</a>
-     <a class="btn btn-primary" href="/tambah">show profile</a>
+     <a class="btn btn-primary" href="/">show profile</a>
      </div>
     </div>
     
@@ -47,7 +47,7 @@
                 <td>{{ $item["kondisi"] }}</td>
                 <td>{{ $item["deskripsi"] }}</td>
                  <td>
-                     <img  style="width: 150px;" src={{ $item["gambar"] }} alt="Image"></td>
+                     <img  style="width: 150px;" src="{{ asset('storage/'.$item->image) }}" alt="Image"></td>
                  <td>
                   <div>
                     <form method="POST" class="d-inline" action="EditProduct/{{$item['id'] }}">
@@ -55,7 +55,7 @@
                         @csrf
                         <button type="submit" onclick="return confirm('are you sure ?')"  data-toggle="tooltip" title="delete" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                       </form>
-                    <a style="color: white" class="btn btn-warning ml-2" href="/EditProduct/{{ $item['id'] }}/edit"><i class="bi bi-pencil-square"></i></a>
+                    <a style="color: white" class="btn btn-warning ml-2" href="EditProduct/{{ $item['id'] }}/edit"><i class="bi bi-pencil-square"></i></a>
                   </div>
                  </td>
               </tr>

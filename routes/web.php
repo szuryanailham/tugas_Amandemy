@@ -23,7 +23,7 @@ Route::get('/tambah',function(){
 });
 Route::get("/listProduct/{user_id}", [HomeController::class, 'show'])->name('listProduct');
 Route::get("/detailuser/{user_id}", [HomeController::class, 'detailUser']);
-Route::resource('/EditProduct',editProductController::class);
+Route::resource('/listProduct/EditProduct',editProductController::class);
 
 
 

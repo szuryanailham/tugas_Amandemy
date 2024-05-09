@@ -11,51 +11,83 @@
       <div class="row">
         <div class="col-6 m-auto my-5 border border-success p-3">
           <h2 class="text-center fw-bold mb-4">Tambah data produk</h2>
-          <form method="POST" action="/EditProduct">
+          <form method="POST" enctype="multipart/form-data" action="/listProduct/EditProduct">
             @csrf
-                  @if ($errors->has('error'))
-          <div class="alert alert-danger">
-              {{ $errors->first('error') }}
-          </div>
-      @endif
             {{-- gambar --}}
             <div class="mb-3">
-              <label for="gambar_produk" class="form-label fw-bold">Gambar Produk</label>
-              <input value="{{ old('gambar_produk') }}" name="gambar_produk" type="text" class="form-control" id="gambar_produk">
+                <label for="image" class="form-label fw-bold">Gambar Produk</label>
+                <input value="{{ old('image') }}" type="file" name="image" class="form-control @error('image') is-invalid @enderror"  id="image">
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- nama produk --}}
             <div class="mb-3">
-              <label for="nama_produk" class="form-label fw-bold">Nama Produk</label>
-              <input value="{{ old('nama_produk') }}" name="nama_produk" type="text" class="form-control" id="nama_produk">
+                <label for="nama" class="form-label fw-bold">Nama Produk</label>
+                <input value="{{ old('nama') }}" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror"  id="nama">
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- berat --}}
             <div class="mb-3">
-              <label for="berat_produk" class="form-label fw-bold">berat</label>
-              <input value="{{ old('berat_produk') }}" name="berat_produk" type="number" class="form-control" id="berat_produk">
+                <label for="berat" class="form-label fw-bold">Berat</label>
+                <input value="{{ old('berat') }}" name="berat" type="number" class="form-control @error('berat') is-invalid @enderror" id="berat_produk">
+                @error('berat')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- harga --}}
             <div class="mb-3">
-              <label for="harga_produk" class="form-label fw-bold">Harga</label>
-              <input value="{{ old('harga_produk') }}" name="harga_produk" type="number" class="form-control" id="harga_produk">
+                <label for="harga" class="form-label fw-bold">Harga</label>
+                <input value="{{ old('harga') }}" name="harga" type="number" class="form-control @error('harga') is-invalid @enderror" id="harga">
+                @error('harga')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             {{-- stok --}}
             <div class="mb-3">
               <label for="stok" class="form-label fw-bold">Stok</label>
-              <input value="{{ old('stok') }}" name="stok" type="number" class="form-control" id="stok">
-            </div>
-            <select name="kondisi_barang" class="form-select">
-              <option value="baru" {{ old('kondisi_barang') == 'baru' ? 'selected' : '' }}>Baru</option>
-              <option value="bekas" {{ old('kondisi_barang') == 'bekas' ? 'selected' : '' }}>bekas</option>
+              <input value="{{ old('stok') }}" name="stok" type="number" class="form-control @error('stok') is-invalid @enderror" id="stok">
+              @error('stok')
+                  <div class="invalid-feedback">
+                      {{ $message }}
+                  </div>
+              @enderror
+          </div>
+          
+            <select name="kondisi" class="form-select @error('kondisi') is-invalid @enderror">
+              <option value="baru" {{ old('kondisi') == 'baru' ? 'selected' : '' }}>Baru</option>
+              <option value="bekas" {{ old('kondisi') == 'bekas' ? 'selected' : '' }}>Bekas</option>
           </select>
+          @error('kondisi')
+              <div class="invalid-feedback">
+                  {{ $message }}
+              </div>
+          @enderror
           
           <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label fw-bold">Deskripsi</label>
-              <textarea name="deskripsi" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ old('deskripsi') }}</textarea>
-          </div>
-
+            <label for="deskripsi" class="form-label fw-bold">Deskripsi</label>
+            <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
+            @error('deskripsi')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        
             {{-- submit --}}
             <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+        </form>
+        
         </div>
       </div>
     </section>

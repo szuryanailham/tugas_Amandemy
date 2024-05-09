@@ -27,37 +27,24 @@ class editProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $rules = [
-            'gambar_produk' => "Gambar Produk",
-            'nama_produk' => 'Nama Produk',
-            'berat_produk' => 'Berat Produk',
-            'harga_produk' => 'Harga Produk',
-            'stok' => 'Stok',
-            'kondisi_barang' => 'Kondisi Barang',
-            'deskripsi' => 'Deskripsi',
-        ];
-        
-        foreach ($rules as $inputName => $label) {
-            if ($request->$inputName === null) {
-                return redirect()->back()->withInput()->withErrors(['error' => "$label tidak boleh kosong."]);
-            }
+    {   
+        $validatedData = $request->validate([
+            'image'=>'required|image|file|max:2000',
+            'nama' => 'required|max:255',
+            'berat' => 'required|numeric|min:0',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|numeric|min:0',
+            'kondisi' => 'required|in:baru,bekas',
+            'deskripsi' => 'required|max:2000',
+        ]);
+        if($request->file('image')){
+            $validatedData['image'] = $request->file('image')->store('product-images');
         }
-        
-        // Tambahkan data produk yang baru dimasukkan ke dalam array $data
-        $newProduct = [
-            'gambar' => $request->gambar_produk,
-            'id_user' =>rand(1,2),
-            'nama' => $request->nama_produk,
-            'berat' => $request->berat_produk,
-            'harga' => $request->harga_produk,
-            'stok' => $request->stok,
-            'kondisi' => $request->kondisi_barang,
-            'deskripsi' => $request->deskripsi,
 
-        ];
+        $validatedData['id_user'] = rand(1, 2);
+      
         // memasukan kedalam database:
-        Product::insert($newProduct);
+        Product::insert($validatedData);
         
         return view('product', [
             'product' => Product::all()
@@ -95,7 +82,7 @@ class editProductController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'gambar' => 'required|string',
+            'image'=>'required|image|file|max:2000',
             'nama' => 'required|string',
             'berat' => 'required|numeric',
             'harga' => 'required|numeric',
@@ -103,6 +90,10 @@ class editProductController extends Controller
             'kondisi' => 'required|string',
             'deskripsi' => 'required|string',
         ]);
+        if($request->file('image')){
+            $validatedData['image'] = $request->file('image')->store('product-images');
+        }
+
         Product::where('id', $id)->update($validatedData);
         return redirect('/')->with('success', 'Category has been updated');
     }
@@ -120,6 +111,6 @@ class editProductController extends Controller
     
         $item->delete();
     
-        return redirect()->back()->with('success', 'Data successfully deleted');
+        return redirect('/')->with('success', 'item  has been deleted');
     }
 }
