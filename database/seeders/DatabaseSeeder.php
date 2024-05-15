@@ -19,21 +19,27 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'admin',
-            'email' => 'adminm@gmail.com',
+            'username' => 'admin_username',
             'password'=> bcrypt('admin123'),
             'gender' => 'male', 
-            'tanggal_lahir' => '1990-01-01',
+            'tanggal_lahir' => '2002-01-01',
             'umur' => \Carbon\Carbon::now()->diffInYears('1990-01-01'), 
+            'role' => 'admin',
+            'alamat' => 'jogjakarta,bantul'
         ]);
         
         User::factory()->create([
             'name' => 'user',
+            'username' => 'user_username', // Tambahkan username di sini
             'email' => 'user@gmail.com',
             'password'=> bcrypt('user123'),
             'gender' => 'female', 
-            'tanggal_lahir' => '1995-05-15', 
+            'tanggal_lahir' => '2002-05-15', 
             'umur' => \Carbon\Carbon::now()->diffInYears('1995-05-15'),
+            'role' => 'user',
+            'alamat' => 'jogjakarta,sleman'
         ]);
+        
         
         toko::create([
             'nama' => 'Toko A',

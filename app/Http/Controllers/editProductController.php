@@ -95,7 +95,7 @@ class editProductController extends Controller
         }
 
         Product::where('id', $id)->update($validatedData);
-        return redirect('/')->with('success', 'Category has been updated');
+        return redirect('/home')->with('success', 'Category has been updated');
     }
 
     /**
@@ -111,6 +111,6 @@ class editProductController extends Controller
     
         $item->delete();
     
-        return redirect('/')->with('success', 'item  has been deleted');
+        return redirect('/home')->with('success', 'item  has been deleted');
     }
 }

@@ -21,7 +21,7 @@ class HomeController extends Controller
     
     foreach ($rules as $inputName => $label) {
         if ($request->$inputName === null) {
-            return redirect()->back()->withInput()->withErrors(['error' => "$label tidak boleh kosong."]);
+            return redirect()->back()->withInput()->Errors(['error' => "$label tidak boleh kosong."]);
         }
     }
     
