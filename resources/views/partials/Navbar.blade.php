@@ -5,18 +5,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/news">Berita</a>
+                <a class="nav-link" href="/products">Product</a>
             </li>
+            @can('admin')
             <li class="nav-item">
-                <a class="nav-link" href="#">Kurikulum</a>
-            </li> --}}
+                <a class="nav-link" href="/edit-product">edit product</a>
+            </li>
+            @endcan
         </ul>
         <ul class="navbar-nav ms-auto">
             {{-- JIKA SUDAH LOGIN HILANGKAN TOMBOL LOGIN --}}

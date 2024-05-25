@@ -5,22 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use function Illuminate\Events\queueable;
+use function Laravel\Prompts\search;
+
 class editProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $nameColumn = request('nama'); 
+        $hargaColumn = request('harga'); 
+        $orderDirection = request('order_direction', 'desc'); 
+        $search = $request->input('search');
+        $quantity = $request->input('number'); // Perbaikan nama variabel
+        $products = Product::query();
+    
+        if ($search) {
+            $products->where('nama', 'like', "%$search%")
+                     ->orWhere('deskripsi', 'like', "%$search%");
+        }
+    
+        // Perbaikan logika kuantitas
+        if ($quantity) {
+            $products = $products->paginate($quantity);
+        }else{
+            $products = $products->paginate(7);
+        }
+    
+      
+    
+        return view('Dashboard.Admin.Home', [
+            'products' => $products,
+            'search' => $search // Pass the search query to the view for displaying in the search input field
+        ]);
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('welcome');
+        return view('Dashboard.Admin.tambah');
     }
 
     /**
@@ -40,13 +69,11 @@ class editProductController extends Controller
         if($request->file('image')){
             $validatedData['image'] = $request->file('image')->store('product-images');
         }
-
-        $validatedData['id_user'] = rand(1, 2);
       
         // memasukan kedalam database:
         Product::insert($validatedData);
         
-        return view('product', [
+        return view('Dashboard.Admin.Home', [
             'product' => Product::all()
         ]);
         
@@ -71,7 +98,7 @@ class editProductController extends Controller
             return redirect()->back()->with('error', 'Data not found');
         }
 
-        return view('update',[
+        return view('Dashboard.Admin.Update',[
             'product' => $item
         ]);
     }
@@ -95,7 +122,7 @@ class editProductController extends Controller
         }
 
         Product::where('id', $id)->update($validatedData);
-        return redirect('/home')->with('success', 'Category has been updated');
+        return redirect('/products')->with('success', 'Category has been updated');
     }
 
     /**
@@ -111,6 +138,6 @@ class editProductController extends Controller
     
         $item->delete();
     
-        return redirect('/home')->with('success', 'item  has been deleted');
+        return redirect('/edit-product')->with('success', 'item  has been deleted');
     }
 }

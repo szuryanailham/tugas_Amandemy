@@ -9,9 +9,10 @@
   <a class="btn btn-success" href="/listProduct/2">Marchendast</a>
 
 </div>
-<section class=" container d-flex flex-wrap flex-grow-1 p-5 m-auto">
+<section class="container d-flex flex-wrap flex-grow-1 p-5 m-auto">
     {{-- card 1 --}}
     @foreach ($product as $item)
+    @dd($item);
     <div class="card m-2" style="width: 18rem;">
       @if ($item->image)
       <img class="img-fluid" style="width:700px;max-height:350px;overflow:hidden" src="{{ asset('storage/'.$item->image) }}"  alt="{{ $item->title }}">

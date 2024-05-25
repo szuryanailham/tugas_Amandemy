@@ -27,30 +27,34 @@
         </div>
         <form method="POST" action="/login" class="border border-s p-3 rounded">
           @csrf
-            <div class="mb-3">
-              <label for="email-login" class="form-label">Email address</label>
-              <input value="{{ old('email') }}" name="email" autofocus type="email" class="form-control @error('email') is-invalid @enderror" id="email-login" aria-describedby="emailHelp"/>
-              @error('email')
-              <div id="email-login" class="invalid-feedback">
-                 {{ $message }}
-                </div>
-              @enderror
+          <div class="mb-3">
+            <label for="email-login" class="form-label">Email address</label>
+            <input value="{{ old('email') }}" name="email" autofocus type="email" class="form-control @error('email') is-invalid @enderror" id="email-login" aria-describedby="emailHelp"/>
+            @error('email')
+            <div id="email-login" class="invalid-feedback">
+              {{ $message }}
             </div>
-            <div class="mb-3">
-              <label for="password_login" class="form-label">Password</label>
-              <input name="password" type="password" class="form-control" id="password_login">
-            </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Remember me</label>
-            </div>
-            <!-- Register buttons -->
-            <div class="text-center">
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-success btn-block mb-4">Sign in</button>
-                <p>Not a member? <a href="/signUp">Register</a></p>
-          </form>
-    </div>
+            @enderror
+          </div>
+          <div class="mb-3">
+            <label for="password_login" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" id="password_login">
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Remember me</label>
+          </div>
+          <div class="d-flex flex-column align-items-center">
+            <button type="submit" class="btn btn-success btn-block mb-2 w-50">Sign in</button>
+            <a href="/login/google" class="btn btn-danger btn-block mb-2 w-50">
+              <img src="https://img.icons8.com/color/16/000000/google-logo.png" class="me-2" alt="Google logo"> Login with Google
+            </a>
+          </div>
+          </div>
+          <div class="text-center mt-3">
+            <p>Not a member? <a href="/signUp">Register</a></p>
+          </div>
+        </form>
 </div>
 
 

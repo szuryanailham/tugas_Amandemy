@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('umur')->nullable(); // umur
             $table->rememberToken();
             $table->timestamps();
+            $table->string('google_id')->nullable();
         });
         
     }

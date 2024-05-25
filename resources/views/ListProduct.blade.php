@@ -5,7 +5,7 @@
   <div class="d-flex justify-content-between">
     <h1>List data product</h1>
    <div>
-   <a class="btn btn-success" href="/detailuser/{{ $user_id }}">show profile</a>
+   {{-- <a class="btn btn-success" href="/detailuser/{{ $user_id }}">show profile</a> --}}
    <a class="btn btn-primary" href="/tambah">new product</a>
    <a class="btn btn-primary" href="/">show profile</a>
    </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -41,12 +43,10 @@ class HomeController extends Controller
     return redirect()->route('listProduk');
 }
 
-public function show($id_user){
-    $produk = Product::where('id_user', $id_user)->get();
-    // $produk = Product::all();
-    return view('ListProduct',[
+public function show(){
+    $produk = Product::all();
+    return view('Dashboard.Products',[
         'product'=> $produk,
-        'user_id' =>$id_user
     ]);
 }
 
@@ -64,10 +64,39 @@ public function detailUser($id_user){
 
 
 public function Allproduct(){
-    $produk = Product::all();
-    return view('product',[
-        'product'=> $produk
+    return view('Dashboard.home');
+  
+}
+
+public function checkout($id_barang){
+    $invoiceCode = 'INV-' . Carbon::now()->format('YmdHis');
+    $adminFee = 5;
+    $detailProduct = Product::findOrFail($id_barang);
+    $kodeUnik = session('kode_unik', 0);
+    $invoiceCode .= '-' . $kodeUnik;
+    $total = intval($detailProduct->harga) + $adminFee + $kodeUnik;
+    $kodeUnik++;
+    session(['kode_unik' => $kodeUnik]);
+
+    return view('Dashboard.checkout')->with([
+        'no_invoice' => $invoiceCode,
+        'adminFee' => $adminFee,
+        'productDetail' => $detailProduct,
+        'total_harga' => $total,
+        'metode_pembayaran' => "BNI SYARIAH",
+        'kadal_luarsa' =>Carbon::now()->addHours(3),
+        'data_user' => Auth::user(),
+        'kode_unik' => $kodeUnik // Menambahkan kode unik ke dalam array
     ]);
 }
+
+public function detail($id_product){
+    $detailProduct = Product::findOrFail($id_product);
+    return view('Dashboard.Detail',[
+        'productDetail' => $detailProduct
+    ]);
+  
+}
+
 
 }

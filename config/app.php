@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
+use Maatwebsite\Excel\Exceptions\LaravelExcelException;
 
 return [
 
@@ -168,6 +170,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class
+        // Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -182,7 +186,9 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        
     ])->toArray(),
 
 ];

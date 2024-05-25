@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthLoginController;
 use App\Http\Controllers\editProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
@@ -28,13 +29,14 @@ Route::get('/login',[loginController::class,'index'])->name('login')->middleware
 Route::post('/login',[loginController::class,'authenticate']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get("/listProduct/{user_id}", [HomeController::class, 'show'])->name('listProduct');
-    Route::get("/detailuser/{user_id}", [HomeController::class, 'detailUser']);
+    Route::get("/products", [HomeController::class, 'show'])->name('listProduct');
+    Route::get("/checkout/{kode_barang}", [HomeController::class, 'checkout']);
+    Route::get("/detail/{kode_barang}", [HomeController::class, 'detail']);
     Route::resource('/listProduct/EditProduct', editProductController::class);
-Route::get('/home', [HomeController::class, 'Allproduct'])->name('listProduct');
-    Route::get('/tambah', function () {
-        return view('welcome');
-    });
+    Route::get('/home', [HomeController::class, 'Allproduct'])->name('listProduct');
+    // Route::get('/tambah', function () {
+    //     return view('welcome');
+    // });
     // LOGOUT ROUTER
 Route::get('/logout',[loginController::class,'logout']);
 });
@@ -45,11 +47,10 @@ Route::post('/login',[loginController::class,'authenticate']);
 
 
 
-// ROUTE SIGN UP
-Route::get('/signUp',[RegisterController::class,'index'])->middleware('guest');
-Route::post('/signUp',[RegisterController::class,'store']);
-
-Route::resource('/member', UserController::class)->middleware('admin');
+// ROUTE SIGN UP\
+Route::resource('/edit-product', editProductController::class)->middleware('admin')->names('edit');
 
 
-
+Route::get('google', function () {
+    return view('googleAuth');
+});
